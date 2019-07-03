@@ -1,0 +1,10 @@
+body{
+    font-family: IRANSans !important;
+}
+.HeaderText{
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+.HeaderTextCatagory{
+    font-size: 10px;
+}

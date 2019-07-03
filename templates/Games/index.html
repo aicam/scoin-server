@@ -1,0 +1,145 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'Game_page/css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'Game_page/lib/bootstrap-4.3.1-dist/css/bootstrap-grid.min.css.map' %}" />
+  <link rel="stylesheet" href="{% static 'Game_page/lib/bootstrap-4.3.1-dist/css/bootstrap-reboot.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'Game_page/lib/bootstrap-4.3.1-dist/css/bootstrap.min.css' %}" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+  <link rel="stylesheet" href="{% static 'Game_page/fonts/WebFonts/css/fontiran.css' %}" />
+  <link rel="stylesheet" href="{% static 'Game_page/fonts/WebFonts/css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'Game_page/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'Game_page/lib/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'Game_page/lib/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css' %}">
+</head>
+
+<body>
+  <div class="text-center m-3 mt-4">
+    <span class="bg-warning rounded-pill p-2 text-white mtText2 shadow">بازی ها</span>
+  </div>
+  <div class="row m-0 text-center justify-content-center" dir="rtl">
+
+    <span class="mt-2 mr-2 border-bottom border-white usernametext text-white font-weight-light">{{ username }}</span>
+  </div>
+  <div class="medalslider owl-carousel owl-theme mt-4" dir="ltr">
+
+      {% for i in medals  %}
+        <div class="ml-5 mt-5 text-center ">
+      <p><img src="{% static 'Game_page/images/gold-medals-500x500.jpg' %}" class="img-fluid medalimage" alt="" srcset=""></p>
+      <p class="text-white">3</p>
+        </div>
+
+      {% endfor %}
+
+
+
+  </div>
+  <div class="tableslider owl-carousel owl-theme border border-white p-2 border-bottom-0 rounded-lg" dir="ltr">
+    <div class="mt-4 text-center p-1 bg-tr" dir="rtl">
+      <h4 class="nafaratbartarhafte p-2 text-white rounded-pill">برترین‌های هفته</h4>
+      <table class="table table-hover table-dark rounded">
+        <thead>
+          <tr>
+            <th scope="col">رتبه</th>
+            <th scope="col">نام</th>
+            <th scope="col">رکورد</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in weekly_rates %}
+          <tr>
+            <th scope="row">{{ item.counter }}</th>
+            <td>{{ item.username }}</td>
+            <td>{{ item.rate }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-4 text-center p-1 bg-tr" dir="rtl">
+      <table class="table table-hover table-dark rounded">
+        <h4 class="bartarinmah p-2 text-white rounded-pill">برترین‌های ماه</h4>
+        <thead>
+          <tr>
+            <th scope="col">رتبه</th>
+            <th scope="col">نام</th>
+            <th scope="col">رکورد</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in month_rates %}
+          <tr>
+            <th scope="row">{{ item.counter }}</th>
+            <td>{{ item.username }}</td>
+            <td>{{ item.rate }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-4 text-center p-1 bg-tr" dir="rtl">
+      <table class="table table-hover table-dark rounded">
+        <h4 class="nafaratbartarbombha p-2 text-white rounded-pill">برترین‌های بمب‌ها</h4>
+        <thead>
+          <tr>
+            <th scope="col">رتبه</th>
+            <th scope="col">نام</th>
+            <th scope="col">رکورد</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in bomb_rates %}
+          <tr>
+            <th scope="row">{{ item.counter }}</th>
+            <td>{{ item.username }}</td>
+            <td>{{ item.rate }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="gameslider owl-carousel owl-theme border border-white p-2 rounded-lg" dir="ltr">
+    <div class="text-center">
+      <a href="game_page?username={{ username }}&game_id=2"><img class="img-fluid" src="{% static 'Game_page/images/2048.png' %}" alt="" srcset=""></a>
+      <a href="game_page?username={{ username }}&game_id=2"><button class="btn bg-danger rounded text-white startgametext mt-3"></span> شروع بازی</button></a>
+    </div>
+    <div class="text-center">
+      <a href="game_page?username={{ username }}&game_id=1"><img class="img-fluid" src="{% static 'Game_page/images/pacman.png' %}" alt="" srcset=""></a>
+      <a href="game_page?username={{ username }}&game_id=1"><button class="btn bg-danger rounded text-white startgametext mt-3"></span> شروع بازی</button></a>
+    </div>
+    <div class="text-center">
+      <a href="game_page?username={{ username }}&game_id=5"><img class="img-fluid" src="{% static 'Game_page/images/Mine2.ico' %}" alt="" srcset=""></a>
+      <a href="game_page?username={{ username }}&game_id=5"><button class="btn bg-danger rounded text-white startgametext mt-3"></span> شروع بازی</button></a>
+    </div>
+    <div class="text-center">
+      <a href="game_page?username={{ username }}&game_id=3"><img class="img-fluid" src="{% static 'Game_page/images/hex.png' %}" alt="" srcset=""></a>
+      <a href="game_page?username={{ username }}&game_id=3"><button class="btn bg-danger rounded text-white startgametext mt-3"></span> شروع بازی</button></a>
+    </div>
+    <div class="text-center">
+      <a href="game_page?username={{ username }}&game_id=6"><img class="img-fluid" src="{% static 'Game_page/images/tower.png' %}" alt="" srcset=""></a>
+      <a href="game_page?username={{ username }}&game_id=6"><button class="btn bg-danger rounded text-white startgametext mt-3"></span> شروع بازی</button></a>
+    </div>
+  </div>
+
+
+
+  <!-- scripts -->
+  <script src="{% static 'Game_page/scripts/script.js' %}"></script>
+  <script src="{% static 'Game_page/lib/jquery.min.js' %}"></script>
+  <script src="{% static 'Game_page/lib/popper.min.js' %}"></script>
+  <script src="{% static 'Game_page/lib/tooltip.min.js' %}"></script>
+  <script src="{% static 'Game_page/lib/bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'Game_page/lib/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'Game_page/lib/OwlCarousel2-2.3.4/dist/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'Game_page/scripts/script.js' %}"></script>
+</body>
+
+</html>

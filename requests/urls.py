@@ -1,0 +1,33 @@
+from django.urls import path
+from . import views
+urlpatterns = [
+    path('',views.index),
+    path(r'<p>/[0-9]+',views.category),
+    path('category',views.category),
+    path('homepage',views.HomePage),
+    path('location',views.location),
+    path('ADinfo',views.ADinfo),
+    path('more',views.more),
+    path('comment',views.comment),
+    path('receive_comments',views.show_comment),
+    path('search_data',views.Search_data),
+    path('addscore',views.getHighScore),
+    path('test',views.test),
+    path('userData',views.userData),
+    path('Buy',views.Buy),
+    path('submit_buy',views.submit_buy),
+    path('getNotif',views.get_notif),
+    path('register',views.register_user),
+    path('check_registered',views.check_user_exists),
+    path('check_user_exist',views.check_username_exists),
+    path('get_profile',views.return_name),
+    path('video_award',views.video_award),
+    path('games',views.games),
+    path('game_page',views.game_page),
+    path('Turnover',views.turnover_Dj),
+    path('notification',views.notifs),
+    path('set_rate',views.submit_rate),
+    path('submit_new_ad',views.submit_new_ad),
+    path('vote_page',views.vote_mainpage),
+    path('vote_question',views.vote_questions)
+]

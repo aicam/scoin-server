@@ -1,0 +1,61 @@
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title" style="font-size:40px;padding: 20px 20px 20px 20px;">با پاسخ به سوالات زیر میتوانید اسکوین جمع کنید</h3>
+            </div>
+            <div class="panel-body">
+                {% for item in questions %}
+                <ul class="list-group">
+				<h4 class="text-right" style="font-size:50px;padding: 20px 20px 20px 20px;"><kbd>{{ item.title }}</kbd></h4>
+                    {% for options in item.options %}
+                    <li class="list-group-item">
+                        <button id="{{ options.id }}" type="button" style="font-size:40px;padding: 20px 20px 20px 20px;" class="btn btn-default btn-block btn-sm">
+                    {{ options.text }}</button>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+<style>
+    body {
+        margin-top: 20px;
+    }
+
+    .panel-body:not(.two-col) {
+        padding: 0px;
+    }
+
+    .glyphicon {
+        margin-right: 5px;
+    }
+
+    .glyphicon-new-window {
+        margin-left: 5px;
+    }
+
+    .panel-body .radio, .panel-body .checkbox {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .panel-body .list-group {
+        margin-bottom: 0;
+    }
+
+    .margin-bottom-none {
+        margin-bottom: 0;
+    }
+
+    .panel-body .radio label, .panel-body .checkbox label {
+        display: block;
+    }
+</style>

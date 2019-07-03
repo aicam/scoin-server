@@ -1,0 +1,57 @@
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+    <div class="col-xl-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title text-right" style="font-size:40px;padding: 20px 20px 20px 20px;"><span class="fa fa-line-chart"></span>مجموعه موردنظرتون رو انتخاب کنید</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    {% for item in options %}
+                        <li class="list-group-item">
+                        <a href="vote_question?username={{ username }}&category={{ item.id }}"> <button style="font-size:50px" type="button" class="btn btn-success btn-block btn-sm">
+                        {{ item.title }}</button></a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+<style>
+    body {
+        margin-top: 20px;
+    }
+
+    .panel-body:not(.two-col) {
+        padding: 0px;
+    }
+
+    .glyphicon {
+        margin-right: 5px;
+    }
+
+    .glyphicon-new-window {
+        margin-left: 5px;
+    }
+
+    .panel-body .radio, .panel-body .checkbox {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .panel-body .list-group {
+        margin-bottom: 0;
+
+    }
+
+    .margin-bottom-none {
+        margin-bottom: 0;
+    }
+
+    .panel-body .radio label, .panel-body .checkbox label {
+        display: block;
+    }
+</style>

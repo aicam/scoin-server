@@ -1,0 +1,111 @@
+.mtText {
+  font-weight: 200;
+  font-size: 20px;
+}
+.mtText2 {
+  font-weight: 300;
+  font-size: 25px;
+}
+.fixbtn {
+position: fixed;
+bottom: 10px;
+right: 10px;
+z-index: 1030;
+height: 80px;
+width: 80px;
+cursor: pointer;
+}
+.modal-header .close{
+  margin: -1rem -1rem  auto;
+}
+body {
+  /* overflow-x: hidden !important; */
+  font-family: IRANSans !important;
+  width: 100%;
+  padding: 0px 0 30px;
+  margin: 25px 0 0;
+  background-attachment: scroll, scroll;
+  background-clip: border-box, border-box;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url(../images/pattern.png),
+    linear-gradient(to right, #000000, #434343);
+  background-position: center center, 0 0;
+  background-repeat: repeat, no-repeat;
+}
+.ss {
+  line-height: 35px;
+}
+.usernametext {
+  font-size: 25px;
+}
+.startgame {
+  background: #00f260 !important; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #0575e6,
+    #00f260
+  ) !important; /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #0575e6,
+    #00f260
+  ) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.nafaratbartarhafte {
+  background: #0f2027; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #2c5364,
+    #203a43,
+    #0f2027
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.nafaratbartarbombha {
+  background: #3a7bd5; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #3a6073,
+    #3a7bd5
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #3a6073,
+    #3a7bd5
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.bartarinmah {
+  background: #360033; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #0b8793,
+    #360033
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #0b8793,
+    #360033
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.soinicon {
+  height: 30px;
+  width: 30px;
+}
+.scoinback {
+  background: #314755; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #26a0da,
+    #314755
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #26a0da,
+    #314755
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}

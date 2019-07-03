@@ -1,0 +1,76 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- scripts -->
+    <script src="{% static 'notification_page_styles/lib/jquery.min.js' %}"></script>
+    <script src="{% static 'notification_page_styles/scripts/script.js' %}"></script>
+    <script src="{% static 'notification_page_styles/lib/popper.min.js' %}"></script>
+    <script src="{% static 'notification_page_styles/lib/tooltip.min.js' %}"></script>
+    <script src="{% static 'notification_page_styles/lib/bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'notification_page_styles/lib/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
+    <script>
+    $("#notificationText").hide();
+var ishiden = true;
+      function MyClick() {
+        var x = document.getElementById("notificationText");
+        if (ishiden==true) {
+          ishiden=false;
+          $("#notificationText").fadeIn(3000).show(1500);
+        } else {
+          $("#notificationText").fadeOut(1500).hide(2000);
+          ishiden=true;
+        }
+      }</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'notification_page_styles/css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'notification_page_styles/lib/bootstrap-4.3.1-dist/css/bootstrap-grid.min.css.map' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'notification_page_styles/lib/bootstrap-4.3.1-dist/css/bootstrap-reboot.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'notification_page_styles/lib/bootstrap-4.3.1-dist/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'notification_page_styles/fonts/WebFonts/css/fontiran.css' %}" />
+    <link rel="stylesheet" href="{% static 'notification_page_styles/fonts/WebFonts/css/style.css' %}" />
+  </head>
+  <body>
+    <div class="bg-info text-center p-3 rounded-pill m-4 shadow">
+      <h2 class="text-white">اعلانات</h2>
+    </div>
+    <div class="bg-white p-3">
+      <div class="text-center">
+          {% for item in items %}
+        <div>
+          <h4
+            class="bg-warning p-3 rounded-pill text-white mx-4 shadow"
+            id="notification"
+          >
+            {{ item.title }}
+          </h4>
+        </div>
+        <div>
+          <h5 class="mt-4 font-weight-light" id="notificationText">
+            {{  item.message }}
+          </h5>
+        </div>
+          {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

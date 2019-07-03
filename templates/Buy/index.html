@@ -1,0 +1,207 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <!-- scripts -->
+  <script src="{% static 'main_webpage/scripts/timerScripts.js' %}"></script>
+  <script src="{% static 'main_webpage/lib/Datejs-master/build/date-fa-IR.js' %}"></script>
+    <script src="{% static 'main_webpage/lib/easytimer.js/dist/easytimer.min.js' %}"></script>
+    <script src="{% static 'main_webpage/lib/jquery.min.js' %}"></script>
+    <script src="{% static 'main_webpage/lib/popper.min.js' %}"></script>
+    <script src="{% static 'main_webpage/lib/tooltip.min.js' %}"></script>
+    <script src="{% static 'main_webpage/lib/bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'main_webpage/lib/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
+    <script>
+      $(document).ready(function () {
+          $("#submitbutton").click(function(){
+            $.get("submit_buy?service_code={{ service_id }}&username={{ username }}", function(data){
+              $(".modal-body").html(data);
+            });
+          });
+        // roydade dokme baraye popup
+        $("#exampleModalLabel").html("پیغام");
+        function getTimeRemaining(endtime) {
+          var t = Date.parse(endtime) - Date.parse(new Date());
+          var seconds = Math.floor((t / 1000) % 60);
+          var minutes = Math.floor((t / 1000 / 60) % 60);
+          var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+          var days = Math.floor(t / (1000 * 60 * 60 * 24));
+          return {
+            total: t,
+            days: {{ day }},
+            hours: {{ hour }},
+            minutes: {{ minute }},
+            seconds: {{ seconds }}
+          };
+        }
+
+        function initializeClock(id, endtime) {
+          var clock = document.getElementById(id);
+          var daysSpan = clock.querySelector(".days");
+          var hoursSpan = clock.querySelector(".hours");
+          var minutesSpan = clock.querySelector(".minutes");
+          var secondsSpan = clock.querySelector(".seconds");
+
+          function updateClock() {
+            var t = getTimeRemaining(endtime);
+
+            daysSpan.innerHTML = t.days;
+            hoursSpan.innerHTML = ("0" + t.hours).slice(-2);
+            minutesSpan.innerHTML = ("0" + t.minutes).slice(-2);
+            secondsSpan.innerHTML = ("0" + t.seconds).slice(-2);
+
+            if (t.total <= 0) {
+              clearInterval(timeinterval);
+            }
+          }
+
+          updateClock();
+          var timeinterval = setInterval(updateClock, 1000);
+        }
+//ali inja bayad roz va inaro vared koni va mire tebghe tarikh emrooz shoro mikone be shomaresh....
+//on dokme ham ke on pain be sorat test va methodesham on balas
+        var deadline = Date.today().addDays(2).addHours(4).addMinutes(40).addSeconds(44);
+        initializeClock("clockdiv", deadline);
+       })
+      </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'main_webpage/css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'main_webpage/lib/bootstrap-4.3.1-dist/css/bootstrap-grid.min.css.map' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'main_webpage/lib/bootstrap-4.3.1-dist/css/bootstrap-reboot.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'main_webpage/lib/bootstrap-4.3.1-dist/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'main_webpage/fonts/WebFonts/css/fontiran.css' %}" />
+    <link rel="stylesheet" href="{% static 'main_webpage/fonts/WebFonts/css/style.css' %}" />
+  </head>
+  <body>
+    <div>
+      <section>
+        <div class="bg-success text-center p-2 rounded-pill m-2 shadow">
+          <h3 class="text-white p-2">صفحه‌ی تایید خرید</h3>
+        </div>
+      </section>
+      <section>
+        <div class="text-right mt-5">
+          <span
+            class="text-white rounded-pill bg-warning HeaderText p-2 mr-2 shadow"
+            >عنوان</span
+          >
+        </div>
+        <div class="text-center mt-3">
+          <h5 class="font-weight-light p-3">{{ title }}</h5>
+        </div>
+      </section>
+      <section>
+        <div class="text-right mt-4">
+          <span
+            class="text-white rounded-pill bg-danger HeaderText p-2 mr-2 shadow"
+            >توضیحات</span
+          >
+        </div>
+        <div class="text-center mt-3">
+          <h5 class="font-weight-light p-3 text-justify">
+            {{ desc }}
+          </h5>
+        </div>
+      </section>
+      <section>
+        <div class="text-center mt-4 BuyText m-5">
+            <input
+            type="button"
+            value="خرید"
+            class="btn btn-success form-control font-weight-bold mt-4 rounded-pill mb-4 Test"
+          />
+        </div>
+        <div class="mt-5 text-center mr-2 TimeText col-12">
+          <div id="clockdiv"
+            ><span class="hours ml-4"></span><span class="minutes ml-4"></span
+            ><span class="seconds ml-4"></span>
+            <span class="days ml-3"></span>
+            <div>
+              <span class="d-inline-block UnderTimeText ml-4">ثانیه</span
+              ><span class="d-inline-block UnderTimeText ml-4">دقیقه</span
+              ><span class="d-inline-block UnderTimeText ml-4">ساعت</span
+              ><span class="d-inline-block UnderTimeText ml-4">روز</span>
+            </div>
+          </span>
+        </div>
+        <div></div>
+        </div>
+      </section>
+      <section class="text-center mt-4">
+          <span
+          class="text-white rounded-pill bg-primary HeaderText p-2 shadow"
+          >زمان باقی مانده</span
+        >
+      </section>
+      <section class="text-center mt-5" dir="ltr">
+        <!-- Button trigger modal -->
+        <button
+          id="submitbutton"
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          Launch demo modal
+        </button>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">عنوان پیغام</h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                متن پیغام
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  بستن
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,103 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- scripts -->
+    <script src="{% static 'Turnover_style/scripts/scripts.js' %}"></script>
+    <script src="{% static 'Turnover_style/lib/jquery.min.js' %}"></script>
+    <script src="{% static 'Turnover_style/lib/popper.min.js' %}"></script>
+    <script src="{% static 'Turnover_style/lib/tooltip.min.js' %}"></script>
+    <script src="{% static 'Turnover_style/lib/bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'Turnover_style/lib/bootstrap-4.3.1-dist/js/bootstrap.min.js' %}"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <!-- css -->
+    <link rel="stylesheet" href="{% static 'Turnover_style/css/style.css' %}" />
+    <link
+      rel="stylesheet"
+      href="{% static 'Turnover_style/lib/bootstrap-4.3.1-dist/css/bootstrap-grid.min.css.map' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'Turnover_style/lib/bootstrap-4.3.1-dist/css/bootstrap-reboot.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'Turnover_style/lib/bootstrap-4.3.1-dist/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'Turnover_style/fonts/WebFonts/css/fontiran.css' %}" />
+    <link rel="stylesheet" href="{% static 'Turnover_style/fonts/WebFonts/css/style.css' %}" />
+  </head>
+  <body>
+    <div class="container-fluid" dir="rtl">
+      <section class="bg-warning p-2 rounded-lg mt-3 text-right row shadow">
+        <span>
+          <span class="text-right text-white mt-1 HeaderText">گردش مالی</span>
+          <input
+            type="button"
+            value="همه"
+            class="btn btn-success text-left mr-4 rounded-pill HeaderTextCatagory shadow"
+          />
+        </span>
+      </section>
+      <section class="text-right">
+        <input
+          type="button"
+          value="دریافتی‌ها"
+          class="btn btn-success mr-1 mt-3 rounded-pill HeaderTextCatagory shadow"
+        />
+      </section>
+      {% for data in items %}
+          {% if data.mode == 'b' %}
+      <section class="bg-white rounded-pill shadow">
+        <div class="text-right mt-3 row mr-3">
+          <span class="font-weight-bold"
+            ><span>{{ data.scoin }}</span
+            ><span
+              ><img
+                src="images/s.svg"
+                class="img-fluid mb-3 mr-1 ml-1"
+                alt=""
+                srcset=""/></span
+            >{{ data.title }}</span
+          >
+        </div>
+      </section>
+          {% endif %}
+        {% endfor %}
+      <section class="text-right">
+        <input
+          type="button"
+          value="هزینه‌ها"
+          class="btn btn-danger mr-1 mt-3 rounded-pill HeaderTextCatagory shadow"
+        />
+      </section>
+      {% for data in items %}
+          {% if data.mode == 'h' %}
+      <section class="bg-white rounded-pill shadow">
+        <div class="text-right mt-3 row mr-3">
+          <span class="font-weight-bold"
+            ><span>{{ data.scoin }}</span
+            ><span
+              ><img
+                src="images/s.svg"
+                class="img-fluid mb-3 mr-1 ml-1"
+                alt=""
+                srcset=""/></span
+            >{{ data.title }}</span
+          >
+        </div>
+      </section>
+          {% endif %}
+        {% endfor %}
+    </div>
+  </body>
+</html>
