@@ -90,6 +90,7 @@ class Game_rates(models.Model):
 class medals(models.Model):
     username = models.CharField(max_length=30)
     medal_id = models.CharField(max_length=2)
+    pic_link = models.CharField(max_length=30,default='1')
 
 
 class game_bombs(models.Model):
@@ -104,6 +105,10 @@ class game_bombs_data(models.Model):
     time_start = models.DateTimeField(default=one_day_hence())
     time_end = models.DateTimeField(default=one_day_hence())
     title = models.CharField(max_length=30)
+    link = models.CharField(max_length=30,default='1')
+    award = models.CharField(max_length=50,default='1')
+    capacity = models.IntegerField(default=1)
+    cost = models.CharField(max_length=30,default='a')
     description = models.CharField(max_length=300)
 
 

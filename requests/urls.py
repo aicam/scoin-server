@@ -28,6 +28,4 @@ urlpatterns = [
     path('notification',views.notifs),
     path('set_rate',views.submit_rate),
     path('submit_new_ad',views.submit_new_ad),
-    path('vote_page',views.vote_mainpage),
-    path('vote_question',views.vote_questions)
 ]

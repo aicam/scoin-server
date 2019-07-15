@@ -473,30 +473,14 @@ def register_user(request):
 from django.template import loader
 from .models import Game_rates
 from .models import Games
-
-def vote_mainpage(request):
-    username = request.GET['username']
-    page_data = {}
-    page_data.update({'options': [{'title': 'ورزشی','id': 1}]})
-    template = loader.get_template('Vote_page/index.html')
-    page_data.update({'username':username})
-    return HttpResponse(template.render(page_data,request))
-
-
-def vote_questions(request):
-    username = request.GET['username']
-    question_category = request.GET['category']
-    page_data = {'questions':questions[question_category]}
-    template = loader.get_template('Vote_Questions/index.html')
-    return HttpResponse(template.render(page_data, request))
-
+from .models import game_bombs_data
 
 def games(request):
     username = request.GET['username']
     page_data = {}
     medal_ids = []
     for row_data in medals.objects.filter(username=username):
-        medal_ids.append(row_data.medal_id)
+        medal_ids.append(row_data.pic_link)
     page_data.update({'medals' : medal_ids})
     one_week_later = timezone.now() + timedelta(days=-7)
     print(one_week_later)
@@ -515,16 +499,15 @@ def games(request):
         month_rates_array.append({'username': row_data.username, 'rate': row_data.total_rate, 'counter':cnt})
         cnt += 1
     page_data.update({'month_rates': month_rates_array})
-    bomb_rates_array = []
-    ten_days_later = timezone.now() + timedelta(days=-10)
-    for row_data in Game_rates.objects.raw(
-            'SELECT game_id,id,username,SUM(rate) as total_rate FROM requests_game_rates WHERE time > "' + ten_days_later.strftime("%Y-%m-%d %H:%M:%S.%f") + '" GROUP BY username ORDER BY total_rate DESC limit 5'):
-        bomb_rates_array.append({'username': row_data.username, 'rate': row_data.total_rate})
-    page_data.update({'bomb_rates': bomb_rates_array})
+    events = []
+    for row_data in game_bombs_data.objects.all():
+        events.append({'start_time': str(row_data.time_start), 'end_time': str(row_data.time_end),
+                       'max': row_data.capacity, 'award': row_data.award, 'link': row_data.link,'cost':row_data.cost})
+    page_data.update({'events': events})
     page_data.update({'scoin' : Users.objects.get(username=username).Scoin})
     page_data.update({'username':username})
     template = loader.get_template('Games/index.html')
-    return HttpResponse(template.render(page_data,request))
+    return HttpResponse(json.dumps(page_data))
 
 def game_page(request):
     username = request.GET['username']
@@ -556,14 +539,6 @@ def game_page(request):
         if row_data.username == username:
             break
     page_data.update({'player_rank': player_rank})
-    bomb_rates_array = []
-    ten_days_later = timezone.now() + timedelta(days=-10)
-    cnt = 1
-    for row_data in Game_rates.objects.raw(
-            'SELECT game_id,id,username,SUM(rate) as total_rate FROM requests_game_rates WHERE time > "' + ten_days_later.strftime("%Y-%m-%d %H:%M:%S.%f") + '" and game_id= ' + game_id + ' GROUP BY username ORDER BY total_rate DESC limit 5'):
-        bomb_rates_array.append({'username': row_data.username, 'rate': row_data.total_rate,'cnt':cnt})
-        cnt += 1
-    page_data.update({'bomb_rates': bomb_rates_array})
     page_data.update({'scoin' : Users.objects.get(username=username).Scoin})
     page_data.update({'username':username})
     page_data.update({'game_id':game_id})
@@ -576,7 +551,7 @@ def getHighScore(request):
     score = request.GET['add']
     game_id = request.GET['game_id']
     if Game_rates.objects.filter(username=userID,game_id=game_id).count() > 0:
-        user_game = Game_rates.objects.get(username=userID)
+        user_game = Game_rates.objects.get(username=userID,game_id=game_id)
         if user_game.rate < int(score):
             timee = timezone.now()
             user_game.rate = int(score)
@@ -682,6 +657,7 @@ def Buy(request):
 
 
 def submit_buy(request):
+
     service_code = request.GET['service_code']
     username = request.GET['username']
     page_data_parse = {}
