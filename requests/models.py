@@ -26,7 +26,8 @@ class advertisement(models.Model):
     Scoin_available = models.IntegerField(default=0)
     Scoin_cost = models.IntegerField(default=20)
     priority = models.IntegerField(max_length=3)
-
+    pay_way=models.CharField(max_length=800,default="pay_way")
+    features=models.CharField(max_length=800,default="Features")
 
 class Users(models.Model):
     userID = models.AutoField(primary_key=True)
@@ -90,7 +91,7 @@ class Game_rates(models.Model):
 class medals(models.Model):
     username = models.CharField(max_length=30)
     medal_id = models.CharField(max_length=2)
-    pic_link = models.CharField(max_length=30,default='1')
+    pic_link = models.CharField(max_length=100, default='1')
 
 
 class game_bombs(models.Model):
@@ -110,6 +111,7 @@ class game_bombs_data(models.Model):
     capacity = models.IntegerField(default=1)
     cost = models.CharField(max_length=30,default='a')
     description = models.CharField(max_length=300)
+
 
 # models related to shopping and selling
 class codes(models.Model):
@@ -154,3 +156,35 @@ class notifications(models.Model):
     title = models.CharField(max_length=100)
     message = models.CharField(max_length=500)
     seen = models.CharField(max_length=1)
+
+#Hafez's Changes
+class Quiz(models.Model):
+    title = models.CharField(max_length=100)
+    num_of_question = models.IntegerField
+    reward = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.title + ' - ' + self.reward
+
+
+class Question(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    description = models.CharField(max_length=1000)
+    time = models.PositiveIntegerField(blank=True, null=True)
+    op1 = models.CharField(max_length=500)
+    op2 = models.CharField(max_length=500)
+    op3 = models.CharField(max_length=500)
+    op4 = models.CharField(max_length=500)
+    answer = models.PositiveIntegerField(blank=True, null=True)
+    score = models.FloatField(null=True, blank=True, default=1.0)
+
+    def __str__(self):
+        return self.description
+
+
+class quiz_scores(models.Model):
+    username = models.CharField(max_length=30)
+    score = models.FloatField(null=True, blank=True)
+    date = models.DateField(default=timezone.now())
+    quiz_id = models.PositiveIntegerField(blank=True, null=True)
+
