@@ -28,4 +28,8 @@ urlpatterns = [
     path('notification',views.notifs),
     path('set_rate',views.submit_rate),
     path('submit_new_ad',views.submit_new_ad),
+    path('add_to_event',views.add_to_event),
+    path('get_user_events',views.get_user_events),
+    path('get_seller_data',views.get_seller_data),
+    path('remove_seller_code',views.remove_seller_code)
 ]

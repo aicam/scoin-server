@@ -111,10 +111,22 @@ class game_bombs_data(models.Model):
     cost = models.CharField(max_length=30,default='a')
     description = models.CharField(max_length=300)
 
-
+# models related to shopping and selling
 class codes(models.Model):
     id = models.IntegerField(primary_key=True)
+    ad_id = models.IntegerField(default=1)
     code = models.CharField(max_length=100)
+
+class sellers(models.Model):
+    username = models.CharField(primary_key=True,max_length=20)
+    password = models.CharField(max_length=20)
+    ad_id = models.ForeignKey('advertisement', on_delete=models.CASCADE)
+    phonenumber = models.CharField(max_length=20)
+
+class sellers_code(models.Model):
+    ad_id = models.IntegerField()
+    name = models.CharField(max_length=20)
+    code = models.CharField(max_length=50)
 
 
 class IpAddresses(models.Model):
